@@ -4,6 +4,7 @@ import axios from 'axios'
 import { currentUser } from '../storeAndSlices/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { nanoid } from 'nanoid';
+import conf from "../conf/conf"
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -13,7 +14,10 @@ const Home = () => {
 
     const getCurrentUser = async () => {
       try {
-        const response = await axios.get("/api/v1/users/getCurrentUser")
+       const config = {
+          withCredentials: true
+        }
+        const response = await axios.get(`${conf.backendUrl}/api/v1/users/getCurrentUser`, config )
         dispatch(currentUser(response?.data?.data))
       } catch (error) {
         console.log(error)

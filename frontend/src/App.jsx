@@ -15,6 +15,7 @@ import Messages from "./pages/Messages"
 import { io } from "socket.io-client"
 import NotFound from "./pages/NotFound"
 import { Toaster } from 'sonner';
+import conf from "./conf/conf"
 
 function App() {
   const dispatch = useDispatch()
@@ -23,7 +24,10 @@ function App() {
 
   const getCurrentUser = async () => {
     try {
-      const response = await axios.get("/api/v1/users/getCurrentUser")
+      const config = {
+        withCredentials: true
+      }
+      const response = await axios.get(`${conf.backendUrl}/api/v1/users/getCurrentUser`, config)
       dispatch(currentUser(response?.data?.data))
     } catch (error) {
       console.log(error)
@@ -78,7 +82,7 @@ function App() {
         <Route path="/messages" element={<ProtectedRoute element={<Messages socket={socket} />} />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
-      <Toaster richColors position="top-right" closeButton />
+      <Toaster richColors position="bottom-right" closeButton />
     </>
 
   )

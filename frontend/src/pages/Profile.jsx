@@ -24,7 +24,6 @@ const Profile = () => {
   const settingsBtnClicked = () => {
     navigate("settings")
   }
-  console.log(userPosts)
 
   return (
     <div className='pt-16 h-screen overflow-auto h-42 overflow-y-scroll no-scrollbar  bg-slate-100 w-full xl:pt-0 flex flex-col items-center xl:w-7/12 '>

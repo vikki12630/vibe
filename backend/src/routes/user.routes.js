@@ -27,13 +27,13 @@ router.route("/getUserDetails/:id").get(getUserDetails);
 
 // secure routes
 
-router.route("/logout").post(verifyJWT, logoutUser);
+router.route("/logout").get(verifyJWT, logoutUser);
 
 router.route("/getCurrentUser").get(verifyJWT, getCurrentUser);
 
 router.route("/searchUser").get(verifyJWT, searchUserWithUsernameOrFullName);
 
-router.route("/follow/:id").post(verifyJWT, followUnfollowUser)
+router.route("/follow/:id").get(verifyJWT, followUnfollowUser)
 
 router.route("/getUserDetailsReqBody").get(verifyJWT, getUserDetailsReqBody);
 

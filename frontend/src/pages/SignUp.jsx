@@ -4,6 +4,7 @@ import { login } from '../storeAndSlices/authSlice';
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from 'sonner';
+import conf from '../conf/conf';
 
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -72,9 +73,10 @@ const SignUp = () => {
       const config = {
         headers: {
           "content-type": "application/json"
-        }
+        },
+        withCredentials: true
       }
-      await axios.post("/api/v1/users/signUp", { fullName, email, password, username }, config)
+      await axios.post(`${conf.backendUrl}/api/v1/users/signUp`, { fullName, email, password, username }, config)
       toast.success("Sign-Up success")
       navigate("/home")
       dispatch(login())

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { IoImages } from "react-icons/io5";
 import { newPosts } from '../storeAndSlices/userPostSlice'
 import { toast } from 'sonner';
+import conf from "../conf/conf"
 
 const AddPost = ({ setIsPostMenu, setNewUserFeed }) => {
 
@@ -43,11 +44,12 @@ const AddPost = ({ setIsPostMenu, setNewUserFeed }) => {
       const config = {
         headers: {
           "content-type": "multipart/form-data"
-        }
+        },
+        withCredentials: true
       }
       const postImage = new FormData()
       postImage.append('file', file)
-      const response = await axios.post("/api/v1/posts/createPost", myForm, config)
+      const response = await axios.post(`${conf.backendUrl}/api/v1/posts/createPost`, myForm, config)
       image.src = "/gallery.svg"
       setFile(undefined)
       toast.success("post created successfully")

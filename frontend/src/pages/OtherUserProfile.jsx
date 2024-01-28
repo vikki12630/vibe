@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import ProfilePagePostComponent from '../components/ProfilePagePostComponent'
 import { PiSmileySadDuotone } from "react-icons/pi";
 import { toast } from 'sonner';
+import conf from "../conf/conf"
 
 const OtherUserProfile = () => {
 
@@ -21,7 +22,10 @@ const OtherUserProfile = () => {
   const getUser = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(`/api/v1/users/getUserDetails/${id}`)
+      const config = {
+        withCredentials: true
+      }
+      const response = await axios.get(`${conf.backendUrl}/api/v1/users/getUserDetails/${id}`, config)
       setLoading(false)
       setUser(response.data?.data?.user)
     } catch (error) {
@@ -33,8 +37,10 @@ const OtherUserProfile = () => {
   useEffect(() => {
     const getUserPosts = async () => {
       try {
-        const response = await axios.get(`/api/v1/posts/otherUserPosts/${id}`)
-        // console.log(response?.data?.data)
+        const config = {
+          withCredentials: true
+        }
+        const response = await axios.get(`${conf.backendUrl}/api/v1/posts/otherUserPosts/${id}`, config)
         setPosts(response?.data?.data)
       } catch (error) {
         console.log(error)
@@ -47,7 +53,10 @@ const OtherUserProfile = () => {
   const followUnfollowHandler = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`/api/v1/users/follow/${id}`)
+      const config = {
+        withCredentials: true
+      }
+      await axios.get(`${conf.backendUrl}/api/v1/users/follow/${id}`, config)
       getUser()
       getUserFeed()
     } catch (error) {

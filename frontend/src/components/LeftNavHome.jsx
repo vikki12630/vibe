@@ -12,6 +12,7 @@ import { IoClose } from "react-icons/io5";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { IoSearchSharp } from "react-icons/io5";
 import AddPost from './AddPost'
+import conf from "../conf/conf"
 
 const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
   const navigate = useNavigate()
@@ -22,7 +23,10 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
   const logoutHandler = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/users/logout")
+      const config = {
+        withCredentials: true
+      }
+      await axios.get(`${conf.backendUrl}/api/v1/users/logout`, config)
       dispatch(logout())
       navigate("/")
     } catch (error) {
@@ -37,7 +41,7 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
   const closeMenuHandler = () => {
     setIsMobileMenu(current => !current)
   }
- 
+
   const homecloseonclick = (e) => {
     e.preventDefault()
     navigate("/home")
@@ -142,7 +146,7 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
           <div
             onClick={homecloseonclick}
             className='flex items-center hover:scale-95 hover:text-slate-700 hover:underline cursor-pointer'
-            >
+          >
             <FaHome />
             Home
           </div>
@@ -156,14 +160,14 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
           <div
             onClick={msgcloseonclick}
             className='flex items-center hover:scale-95 hover:text-slate-700 hover:underline cursor-pointer'
-            >
+          >
             <BiMessageRoundedDetail />
             Messages
           </div>
           <div
             onClick={profilecloseonclick}
             className='flex items-center hover:scale-95 hover:text-slate-700 hover:underline gap-1 cursor-pointer'
-            >
+          >
             {currentUser?.avatar ? <img src={currentUser?.avatar} className='rounded-full h-12' /> : <CgProfile />}
             Profile
           </div>
@@ -179,14 +183,14 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
 
       <section id='addPostSmMdDevices' className={isPostMenu ? 'absolute top-0 h-screen bg-transparent w-full text-5xl flex-col items-center justify-center transition-all flex' : 'absolute top-0 h-screen  w-full text-5xl flex-col items-center justify-center transition-all hidden'}>
         <div className='w-full xl:w-6/12 bg-slate-800  text-white h-screen xl:h-5/6 xl:rounded-2xl overflow-auto overflow-y-scroll no-scrollbar flex flex-col items-center mt-20 xl:mt-0 z-20'>
-        <button
-          onClick={closePostMenuHandler}
+          <button
+            onClick={closePostMenuHandler}
             className='text-6xl text-red-500 px-6 xl:py-1 self-end hover:scale-95'>
-          <IoClose />
-        </button>
-        <p className='underline text-yellow-100 mb-2'>create post</p>
-        <AddPost setNewUserFeed={setNewUserFeed} setIsPostMenu={setIsPostMenu} />
-        
+            <IoClose />
+          </button>
+          <p className='underline text-yellow-100 mb-2'>create post</p>
+          <AddPost setNewUserFeed={setNewUserFeed} setIsPostMenu={setIsPostMenu} />
+
         </div>
       </section>
     </>

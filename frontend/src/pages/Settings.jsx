@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { LiaUserEditSolid } from "react-icons/lia";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import { IoClose, IoImages } from 'react-icons/io5';
 import axios from "axios";
 import { useOutletContext } from 'react-router-dom';
+import conf from '../conf/conf';
+import { toast } from 'sonner';
 
 const Settings = ({ getCurrentUser }) => {
 
@@ -33,7 +35,8 @@ const Settings = ({ getCurrentUser }) => {
   const config = {
     headers: {
       "content-type": "application/json"
-    }
+    },
+    withCredentials: true
   }
 
   // ****************change avatar/profile pic****************//
@@ -68,10 +71,12 @@ const Settings = ({ getCurrentUser }) => {
       const config = {
         headers: {
           "content-type": "multipart/form-data"
-        }
+        },
+        withCredentials: true
       }
       
-      await axios.put("/api/v1/users/updateAvatar", myForm, config)
+       await axios.put(`${conf.backendUrl}/api/v1/users/updateAvatar`, myForm, config)
+      toast.success("avatar updated successfully")
       getCurrentUser()
       getUserFeed()
       image.src = ""
@@ -79,7 +84,7 @@ const Settings = ({ getCurrentUser }) => {
       setBtnLoading(false)
       setFile(undefined)
     } catch (error) {
-      console.log(error)
+      toast.error("unable to update avatar")
       setBtnLoading(false)
     }
   }
@@ -95,14 +100,14 @@ const Settings = ({ getCurrentUser }) => {
     e.preventDefault()
     setBtnLoading(true)
     try {
-      await axios.put('/api/v1/users/updateUsername', { newUsername }, config)
-      console.log("username updated")
+      await axios.put(`${conf.backendUrl}/api/v1/users/updateUsername`, { newUsername }, config)
+      toast.success("username updated successfully")
       getCurrentUser()
       getUserFeed()
       setIsUserName(current => !current)
       setBtnLoading(false)
     } catch (error) {
-      console.log(error)
+      toast.error("unable to update username")
       setBtnLoading(false)
     }
   }
@@ -119,13 +124,13 @@ const Settings = ({ getCurrentUser }) => {
     e.preventDefault()
     setBtnLoading(true)
     try {
-      await axios.put('/api/v1/users/updateFullName', { newFullName }, config)
-      console.log("fullName updated")
+      await axios.put(`${conf.backendUrl}/api/v1/users/updateFullName`, { newFullName }, config)
+      toast.success("fullname updated successfully")
       getCurrentUser()
       setIsName(current => !current)
       setBtnLoading(false)
     } catch (error) {
-      console.log(error)
+      toast.error("unable to update fullname")
       setBtnLoading(false)
     }
   }
@@ -142,13 +147,13 @@ const Settings = ({ getCurrentUser }) => {
     e.preventDefault()
     setBtnLoading(true)
     try {
-      await axios.put('/api/v1/users/updateEmail', { newEmail }, config)
-      console.log("email updated")
+      await axios.put(`${conf.backendUrl}/api/v1/users/updateEmail`, { newEmail }, config)
+      toast.success("email updated successfully")
       getCurrentUser()
       setIsEmail(current => !current)
       setBtnLoading(false)
     } catch (error) {
-      console.log(error)
+      toast.error("unable to update email")
       setBtnLoading(false)
     }
   }
@@ -165,13 +170,13 @@ const Settings = ({ getCurrentUser }) => {
     e.preventDefault()
     setBtnLoading(true)
     try {
-      await axios.put('/api/v1/users/updatePassword', { oldPassword, newPassword }, config)
-      console.log("password updated")
+      await axios.put(`${conf.backendUrl}/api/v1/users/updatePassword`, { oldPassword, newPassword }, config)
+      toast.success("password updated successfully")
       getCurrentUser()
       setIsPassword(current => !current)
       setBtnLoading(false)
     } catch (error) {
-      console.log(error)
+      toast.error("unable to update password")
       setBtnLoading(false)
     }
   }
@@ -179,7 +184,7 @@ const Settings = ({ getCurrentUser }) => {
   return (
 
     <>
-      <div className='w-full h-screen transition-all xl:w-6/12'>
+      <div className='w-full h-screen transition-all xl:w-7/12'>
         <div className='mt-20 flex flex-col items-center xl:mt-0 '>
           <div className='flex items-center underline gap-4 text-6xl font-semibold mb-6'>Settings <LiaUserEditSolid />
           </div>
@@ -233,7 +238,7 @@ const Settings = ({ getCurrentUser }) => {
           </div>
         </div>
       </div>
-      <section className={isAvatar ? 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all flex' : 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all hidden'}>
+      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isAvatar ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12  mt-28'>
           <button
             onClick={closeChangeAvatar}
@@ -267,7 +272,7 @@ const Settings = ({ getCurrentUser }) => {
 
         </div>
       </section>
-      <section className={isUserName ? 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all flex' : 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all hidden'}>
+      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isUserName ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12 h-1/3 mt-28'>
           <button
             onClick={closeChangeUserName}
@@ -289,7 +294,7 @@ const Settings = ({ getCurrentUser }) => {
         </div>
       </section>
 
-      <section className={isName ? 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all flex' : 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all hidden'}>
+      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isName ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12 h-1/3 mt-28'>
           <button
             onClick={closeChangeFullName}
@@ -311,7 +316,7 @@ const Settings = ({ getCurrentUser }) => {
         </div>
       </section>
 
-      <section className={isEmail ? 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all flex' : 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all hidden'}>
+      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isEmail ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12 h-1/3 mt-28'>
           <button
             onClick={closeChangeEmail}
@@ -320,7 +325,7 @@ const Settings = ({ getCurrentUser }) => {
           </button>
           <p className='mx-5 text-3xl'>email</p>
           <input
-            type="text"
+            type="email"
             placeholder='change email'
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
@@ -333,7 +338,7 @@ const Settings = ({ getCurrentUser }) => {
         </div>
       </section>
 
-      <section className={isPassword ? 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all flex' : 'absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all hidden'}>
+      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isPassword ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12 h-1/3 mt-28'>
           <button
             onClick={closeChangePassword}

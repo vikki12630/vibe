@@ -24,7 +24,7 @@ router.route("/createPost").post(
 
 router.route("/feed").get(verifyJWT, getFeedPost);
 
-router.route("/like/:id").put(verifyJWT, likeAndUnlikePost);
+router.route("/like/:id").get(verifyJWT, likeAndUnlikePost);
 
 router.route("/userPosts").get(verifyJWT, getPosts);
 

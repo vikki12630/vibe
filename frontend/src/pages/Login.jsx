@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../storeAndSlices/authSlice';
 import { toast } from 'sonner';
+import conf from "../conf/conf"
 
 
 
@@ -42,15 +43,15 @@ const Login = () => {
       const config = {
         headers: {
           "content-type": "application/json"
-        }
+        },
+        withCredentials: true
       }
-      await axios.post("/api/v1/users/signIn", { email, password }, config)
+      await axios.post(`${conf.backendUrl}/api/v1/users/signIn`, { email, password }, config)
       dispatch(login())
       toast.success("login success")
       navigate("/home")
       setLoading(false)
     } catch (error) {
-      console.log(error)
       toast.error(error?.response?.status === 403 ||404 ?"Invalid email or password": "login failed try again")
       errRef.current.focus();
       setLoading(false)

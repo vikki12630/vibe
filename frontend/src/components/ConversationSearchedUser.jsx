@@ -1,12 +1,19 @@
 import axios from 'axios'
 import React from 'react'
+import conf from '../conf/conf'
 
 const ConversationSearchedUser = ({ user, setCurrentChat, currentUser, setAddSectionOprnClose }) => {
 
   const newConversation = async () => {
 
     try {
-      const response = await axios.post("/api/v1/conversations/createConversation", { participants: [currentUser._id, user._id] })
+      const config = {
+        headers: {
+          "content-type": "application/json"
+        },
+        withCredentials: true
+      }
+      const response = await axios.post(`${conf.backendUrl}/api/v1/conversations/createConversation`, { participants: [currentUser._id, user._id] }, config)
       setCurrentChat(response?.data?.data)
       setAddSectionOprnClose(section => !section)
     } catch (error) {

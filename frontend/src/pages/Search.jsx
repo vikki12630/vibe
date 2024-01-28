@@ -5,6 +5,7 @@ import SearchedUserResults from '../components/SearchedUserResults'
 import { useSelector } from 'react-redux'
 import { IoIosSearch } from "react-icons/io";
 import { toast } from 'sonner';
+import conf from "../conf/conf"
 
 const Search = () => {
   const searchRef = useRef();
@@ -16,12 +17,12 @@ const Search = () => {
     e.preventDefault()
     const searchInput = async () => {
       try {
-        const response = await axios.get(`/api/v1/users/searchUser?search=${search}`)
-        // console.log(response?.data?.data)
+        const config = {
+          withCredentials: true
+        }
+        const response = await axios.get(`${conf.backendUrl}/api/v1/users/searchUser?search=${search}`, config)
         setSearchedUser(response?.data?.data)
-        console.log(response)
       } catch (error) {
-        console.log(error)
         toast.error(error?.response?.status === 404 ? "Invalid username or email" : "user not found try again")
       }
     }

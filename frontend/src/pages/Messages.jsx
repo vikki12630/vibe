@@ -10,6 +10,7 @@ import Message from '../components/Message';
 import ConversationSearchedUser from '../components/ConversationSearchedUser';
 import { nanoid } from 'nanoid';
 import { toast } from 'sonner';
+import conf from '../conf/conf';
 
 const Messages = ({ socket }) => {
 
@@ -35,7 +36,10 @@ const Messages = ({ socket }) => {
   useEffect(() => {
     const getUserConversation = async () => {
       try {
-        const response = await axios.get(`/api/v1/conversations/${currentUser._id}`)
+        const config = {
+          withCredentials: true
+        }
+        const response = await axios.get(`${conf.backendUrl}/api/v1/conversations/${currentUser._id}`, config)
         setConversations(response?.data?.data)
       } catch (error) {
         console.log(error)
@@ -59,7 +63,10 @@ const Messages = ({ socket }) => {
     e.preventDefault()
     const searchInput = async () => {
       try {
-        const response = await axios.get(`/api/v1/users/searchUser?search=${search}`)
+        const config = {
+          withCredentials: true
+        }
+        const response = await axios.get(`${conf.backendUrl}/api/v1/users/searchUser?search=${search}`, config)
         setSearchedUser(response?.data?.data)
       } catch (error) {
         console.log(error)
@@ -74,7 +81,10 @@ const Messages = ({ socket }) => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const response = await axios.get(`/api/v1/messages/${currentChat?._id}`)
+        const config = {
+          withCredentials: true
+        }
+        const response = await axios.get(`${conf.backendUrl}/api/v1/messages/${currentChat?._id}`, config)
         setMessages(response?.data?.data)
       } catch (error) {
         console.log(error)
@@ -91,11 +101,17 @@ const Messages = ({ socket }) => {
   const sendChat = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/v1/messages/createMessage`, {
+      const config = {
+        headers: {
+          "content-type": "application/json"
+        },
+        withCredentials: true
+      }
+      const response = await axios.post(`${conf.backendUrl}/api/v1/messages/createMessage`, {
         text: newMessage,
         sender: currentUser._id,
         conversationId: currentChat._id,
-      })
+      }, config)
       // console.log(response?.data?.data)
       socket.emit("sendMsg", {
         senderId: currentUser._id,
@@ -200,9 +216,9 @@ const Messages = ({ socket }) => {
 
       </div>
 
-      <section className={addSectionOpenClose ? 'absolute top-0 h-screen bg-transparent w-full text-5xl flex-col items-center justify-center transition-all flex' : 'absolute top-0 h-screen  w-full text-5xl flex-col items-center justify-center transition-all hidden'}
+      <section className={`absolute top-0 h-screen bg-transparent w-full text-5xl flex-col items-center justify-center transition-all ${addSectionOpenClose ? 'flex': 'hidden'}` }
       >
-        <div className='w-full xl:w-5/12 bg-slate-800  text-white h-screen xl:h-2/3 xl:rounded-2xl overflow-auto overflow-y-scroll no-scrollbar flex flex-col items-center mt-20 xl:mt-0'>
+        <div className='w-full xl:w-5/12 bg-slate-200  h-screen xl:h-2/3 xl:rounded-2xl overflow-auto overflow-y-scroll no-scrollbar flex flex-col items-center mt-20 xl:mt-0'>
           <button
             onClick={closeConversationBtn}
             className='text-6xl text-red-500 px-6 self-end hover:scale-95'>

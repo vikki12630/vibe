@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import axios from 'axios';
 import { toast } from 'sonner';
+import conf from "../conf/conf"
 
 const FeedPost = ({ post }) => {
 
@@ -25,10 +26,14 @@ const FeedPost = ({ post }) => {
   const likeBtnClicked = async (e) => {
     e.preventDefault()
     try {
-      await axios.put(`/api/v1/posts/like/${post?._id}`)
+      const config = {
+        withCredentials:true
+      }
+      const response = await axios.get(`${conf.backendUrl}/api/v1/posts/like/${post?._id}`,config)
       setLiked(!liked)
       setLikeLenght(liked ? likeLenght.filter(user => user !== currentUserId) : (prev) => [...prev, currentUserId])
     } catch (error) {
+      console.log(error)
       toast.error(error?.response?.status === 400 ? "can't like your own post" : "unable to like this post try again")
     }
   }
@@ -77,7 +82,7 @@ const FeedPost = ({ post }) => {
         </div>
         <h4 className='text-xl text-balance break-words mb-2'>{post?.text}</h4>
         <img
-        loading='lazy'
+          loading='lazy'
           src={post?.postImage}
           alt=""
           className='md:h-[70svh] shadow-xl'

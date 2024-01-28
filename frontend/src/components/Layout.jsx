@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { userFeedPosts } from '../storeAndSlices/userFeedSlice';
 import { useState } from 'react';
 import axios from 'axios';
+import conf from "../conf/conf"
 
 
 const Layout = () => {
@@ -14,7 +15,10 @@ const Layout = () => {
   const [newUserFeed, setNewUserFeed] = useState([])
   const getUserFeed = async () => {
     try {
-      const response = await axios.get("/api/v1/posts/feed");
+      const config = {
+        withCredentials: true
+      }
+      const response = await axios.get(`${conf.backendUrl}/api/v1/posts/feed`, config );
       setNewUserFeed(response?.data?.data);
     } catch (error) {
       console.log(error);
