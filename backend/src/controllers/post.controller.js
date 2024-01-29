@@ -43,7 +43,7 @@ const createPost = asyncHandler(async (req, res) => {
   const post = await Post.create({
     postedBy,
     text,
-    postImage: postImage?.url,
+    postImage: postImage?.secure_url,
     publicId: postImage?.public_id,
   });
 

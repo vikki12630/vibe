@@ -35,7 +35,7 @@ function App() {
   }
   useEffect(() => {
     getCurrentUser()
-  }, [])
+  }, [userDetail.isAuthenticated])
 
   useEffect(() => {
     setSocket(io(import.meta.env.VITE_BACKEND_URL))

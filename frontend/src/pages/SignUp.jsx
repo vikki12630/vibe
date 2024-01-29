@@ -98,6 +98,7 @@ const SignUp = () => {
           <label className='hidden' htmlFor="username">Username:</label>
           <input
             placeholder='Username'
+            name='username'
             type="text"
             id="username"
             ref={userRef}
@@ -119,6 +120,7 @@ const SignUp = () => {
           <label className='hidden' htmlFor="email">Email:</label>
           <input
             placeholder='Email'
+            name='email'
             type="text"
             id="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -137,6 +139,7 @@ const SignUp = () => {
 
           <label className='hidden' htmlFor="fullName">Fullname:</label>
           <input
+            name='fullName'
             placeholder='Name'
             type="text"
             id="fullName"
@@ -149,6 +152,7 @@ const SignUp = () => {
 
           <label className='hidden' htmlFor="password">Password:</label>
           <input
+            name='password'
             placeholder='Password'
             type="password"
             id="password"
@@ -166,7 +170,7 @@ const SignUp = () => {
           </p>
 
           <button
-           
+
             className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl  font-medium rounded-lg text-2xl  text-center me-2 mb-2 mt-4 h-16'
           >{loading ? <img className=' h-12 my-auto mx-auto' src="/btnLoading.svg" alt="Loading..." /> : "Sign Up"}</button>
         </form>

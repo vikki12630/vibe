@@ -197,6 +197,7 @@ const Messages = ({ socket }) => {
             <form onSubmit={sendChat} className='h-14 absolute bottom-4 left-0 right-0  mx-auto w-10/12 flex gap-2 '>
               <input
                 type="text"
+                name='newMessage'
                 onChange={(e) => setNewMessage(e.target.value)}
                 value={newMessage}
                 className='border-2 border-slate-900 bg-slate-300 placeholder:text-black rounded-xl h-12 px-4 w-full'

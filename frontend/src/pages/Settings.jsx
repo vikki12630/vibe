@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { LiaUserEditSolid } from "react-icons/lia";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import { IoClose, IoImages } from 'react-icons/io5';
@@ -62,7 +62,7 @@ const Settings = ({ getCurrentUser }) => {
     }
   }
 
-  const changeAvatarBtn = async(e) => {
+  const changeAvatarBtn = async (e) => {
     e.preventDefault()
     setBtnLoading(true)
     const myForm = new FormData()
@@ -74,8 +74,8 @@ const Settings = ({ getCurrentUser }) => {
         },
         withCredentials: true
       }
-      
-       await axios.put(`${conf.backendUrl}/api/v1/users/updateAvatar`, myForm, config)
+
+      await axios.put(`${conf.backendUrl}/api/v1/users/updateAvatar`, myForm, config)
       toast.success("avatar updated successfully")
       getCurrentUser()
       getUserFeed()
@@ -96,7 +96,7 @@ const Settings = ({ getCurrentUser }) => {
   const closeChangeUserName = () => {
     setIsUserName(current => !current)
   }
-  const changeUsernameBtn = async(e) => {
+  const changeUsernameBtn = async (e) => {
     e.preventDefault()
     setBtnLoading(true)
     try {
@@ -120,7 +120,7 @@ const Settings = ({ getCurrentUser }) => {
   const closeChangeFullName = () => {
     setIsName(current => !current)
   }
-  const changeFullNameBtn = async(e) => {
+  const changeFullNameBtn = async (e) => {
     e.preventDefault()
     setBtnLoading(true)
     try {
@@ -143,7 +143,7 @@ const Settings = ({ getCurrentUser }) => {
   const closeChangeEmail = () => {
     setIsEmail(current => !current)
   }
-  const changeEmailBtn = async(e) => {
+  const changeEmailBtn = async (e) => {
     e.preventDefault()
     setBtnLoading(true)
     try {
@@ -166,7 +166,7 @@ const Settings = ({ getCurrentUser }) => {
   const closeChangePassword = () => {
     setIsPassword(current => !current)
   }
-  const changePasswordBtn = async(e) => {
+  const changePasswordBtn = async (e) => {
     e.preventDefault()
     setBtnLoading(true)
     try {
@@ -246,14 +246,14 @@ const Settings = ({ getCurrentUser }) => {
             <IoClose />
           </button>
           <img id='avatarPreview' src={currentUser?.avatar || "/user_keov54.png"} alt='img preview' className='w-40 text-lg rounded-full self-center mb-3'></img>
-          
+
           <label
             htmlFor="newAvatar"
             className='flex items-center gap-5 text-5xl hover:cursor-pointer justify-center mb-5'
           >
             <IoImages />
             <span className='text-xl '>
-             choose img
+              choose img
             </span>
           </label>
           <input
@@ -264,7 +264,7 @@ const Settings = ({ getCurrentUser }) => {
             onChange={avatarImage}
             className='hidden'
           />
-          
+
           <button
             onClick={changeAvatarBtn}
             disabled={btnLoading || !file}
@@ -281,6 +281,7 @@ const Settings = ({ getCurrentUser }) => {
           </button>
           <p className='mx-5 text-3xl'>username</p>
           <input
+            name='username'
             type="text"
             placeholder='change username'
             value={newUsername}
@@ -303,6 +304,7 @@ const Settings = ({ getCurrentUser }) => {
           </button>
           <p className='mx-5 text-3xl'>full name</p>
           <input
+            name='fullname'
             type="text"
             placeholder='change full name'
             value={newFullName}
@@ -325,6 +327,7 @@ const Settings = ({ getCurrentUser }) => {
           </button>
           <p className='mx-5 text-3xl'>email</p>
           <input
+            name='email'
             type="email"
             placeholder='change email'
             value={newEmail}
@@ -347,6 +350,7 @@ const Settings = ({ getCurrentUser }) => {
           </button>
           <p className='mx-5 text-3xl'>old password</p>
           <input
+            name='oldPassword'
             type="text"
             placeholder='old password'
             value={oldPassword}
@@ -355,6 +359,7 @@ const Settings = ({ getCurrentUser }) => {
           />
           <p className='mx-5 text-3xl'>new password</p>
           <input
+            name='newPassword'
             type="text"
             placeholder='new password'
             value={newPassword}

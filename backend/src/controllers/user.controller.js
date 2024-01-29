@@ -58,7 +58,8 @@ const signUp = asyncHandler(async (req, res) => {
       Date.now() + process.env.COOKIE_EXPIRY * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    secure: false,
+    secure: true,
+
   };
 
   return res
@@ -104,7 +105,8 @@ const signIn = asyncHandler(async (req, res) => {
       Date.now() + process.env.COOKIE_EXPIRY * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    secure: false,
+    secure: true,
+    sameSite: "None"
   };
 
   return res
@@ -372,7 +374,7 @@ const updateAvatar = asyncHandler(async (req, res) => {
 
   await user.updateOne(
     {
-      avatar: newAvatar?.url,
+      avatar: newAvatar.secure_url ,
       avatarPublicId: newAvatar?.public_id,
     },
     { new: true }
