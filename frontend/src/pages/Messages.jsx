@@ -117,7 +117,7 @@ const Messages = ({ socket }) => {
   }, [messages])
 
   const sendChat = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const config = {
         headers: {
