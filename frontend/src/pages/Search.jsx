@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdDeleteForever } from "react-icons/md"
 import axios from "axios"
 import SearchedUserResults from '../components/SearchedUserResults'
@@ -9,25 +9,41 @@ import conf from "../conf/conf"
 
 const Search = () => {
   const searchRef = useRef();
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState('')
   const [searchedUser, setSearchedUser] = useState([])
   const { currentUser } = useSelector((state) => state.auth)
 
-  const inputForm = (e) => {
-    e.preventDefault()
+  useEffect(() => {
+    let cancel
+    if (!search.trim()) {
+      setSearchedUser([])
+      return;
+    }
     const searchInput = async () => {
+
       try {
         const config = {
-          withCredentials: true
+          withCredentials: true,
+          cancelToken: new axios.CancelToken((c) => cancel = c),
         }
+        await new Promise(resolve => setTimeout(resolve, 100))
+
         const response = await axios.get(`${conf.backendUrl}/api/v1/users/searchUser?search=${search}`, config)
+
         setSearchedUser(response?.data?.data)
       } catch (error) {
-        toast.error(error?.response?.status === 404 ? "Invalid username or email" : "user not found try again")
+        if (axios.isCancel(error)) {
+          return
+        } else if (error?.response?.status === 404) {
+          toast.error("invalid username or email");
+        }
       }
     }
     searchInput()
-  }
+    return () => {
+      cancel()
+    }
+  }, [search]);
 
   const clearBtnOnSearch = (e) => {
     e.preventDefault()
@@ -40,7 +56,7 @@ const Search = () => {
   return (
     <div className='w-full mt-20 xl:mt-0 py-2'>
       <div className='w-3/4 mx-auto flex items-center '>
-        <form name='searchInput' className='w-full flex items-center bg-slate-200 border-2 border-slate-800 shadow-xl  rounded-lg' onSubmit={inputForm}>
+        <form name='searchInput' className='w-full flex items-center bg-slate-200 border-2 border-slate-800 shadow-xl  rounded-lg'>
           < IoIosSearch className='text-4xl text-slate-300' />
 
           <input
@@ -61,9 +77,9 @@ const Search = () => {
           <MdDeleteForever />
         </button>
       </div>
-      { filteredSearchUser?.map((user) => (
+      {filteredSearchUser?.map((user) => (
         <SearchedUserResults key={user._id} user={user} />
-      )) }
+      ))}
     </div>
   )
 }

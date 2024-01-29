@@ -170,7 +170,12 @@ const getUserDetailsReqBody = asyncHandler(async (req, res) => {
 
 // search user query with username or fullname
 const searchUserWithUsernameOrFullName = asyncHandler(async (req, res) => {
-  const users = req.query.search;
+  const users = String(req.query.search);
+
+  if (users.length === 0) {
+    throw new ApiError(400, "search feild empty");
+  }
+
   const query = {
     $or: [
       { fullName: { $regex: users, $options: "i" } },

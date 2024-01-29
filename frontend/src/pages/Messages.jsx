@@ -26,7 +26,7 @@ const Messages = ({ socket }) => {
   const [addSectionOpenClose, setAddSectionOprnClose] = useState(false);
   const { currentUser } = useSelector((state) => state.auth);
   const scrollRef = useRef()
-  // const uniqueKey = nanoid();
+  const searchRef = useRef();
 
   useEffect(() => {
     setOtherUser(currentChat?.participants?.find((user) => user._id !== currentUser._id))
@@ -59,26 +59,44 @@ const Messages = ({ socket }) => {
     setSearchedUser([])
   }
 
-  const inputForm = (e) => {
-    e.preventDefault()
+  useEffect(() => {
+    let cancel
+    if (!search.trim()) {
+      setSearchedUser([])
+      return;
+    }
     const searchInput = async () => {
       try {
         const config = {
-          withCredentials: true
+          withCredentials: true,
+          cancelToken: new axios.CancelToken((c) => cancel = c),
         }
+        await new Promise(resolve => setTimeout(resolve, 100))
+
         const response = await axios.get(`${conf.backendUrl}/api/v1/users/searchUser?search=${search}`, config)
+
         setSearchedUser(response?.data?.data)
       } catch (error) {
-        console.log(error)
-        toast.error(error?.response?.status === 404 ? "Invalid username or email" : "user not found try again")
+        if (axios.isCancel(error)) {
+          return
+        } else if (error?.response?.status === 404) {
+          toast.error("invalid username or email");
+        }
       }
     }
     searchInput()
-  }
+    return () => {
+      cancel()
+    }
+  }, [search])
+
 
   const filteredSearchUser = searchedUser?.filter((user) => user._id !== currentUser._id)
 
   useEffect(() => {
+    if (currentChat === null) {
+      return;
+    }
     const getMessages = async () => {
       try {
         const config = {
@@ -164,7 +182,7 @@ const Messages = ({ socket }) => {
               <p className='text-3xl font-semibold'>{otherUser?.username}</p>
             </div>
             <div id='messages' className="w-full  flex flex-col gap-1 h-screen overflow-auto overflow-y-scroll no-scrollbar pb-24 px-4 xl:px-10 ">
-              
+
 
               {messages?.map((message) => (
                 <Message
@@ -197,7 +215,7 @@ const Messages = ({ socket }) => {
             <img src="/openconversation.svg" className='h-4/6' alt="" />
             <p className='text-center text-4xl '>open a conversation</p>
             <p className='absolute bottom-2 left-0 hover:bg-green-200'>
-              <a href="https://www.freepik.com/free-vector/happy-man-online-dating-via-laptop_9649925.htm#query=chat%20svg&position=11&from_view=keyword&track=ais&uuid=6ecd0f69-6103-4adb-9e84-376626ce7a24">Image by pch.vector on Freepik</a> 
+              <a href="https://www.freepik.com/free-vector/happy-man-online-dating-via-laptop_9649925.htm#query=chat%20svg&position=11&from_view=keyword&track=ais&uuid=6ecd0f69-6103-4adb-9e84-376626ce7a24">Image by pch.vector on Freepik</a>
             </p>
           </div>
         }
@@ -216,7 +234,7 @@ const Messages = ({ socket }) => {
 
       </div>
 
-      <section className={`absolute top-0 h-screen bg-transparent w-full text-5xl flex-col items-center justify-center transition-all ${addSectionOpenClose ? 'flex': 'hidden'}` }
+      <section className={`absolute top-0 h-screen bg-transparent w-full text-5xl flex-col items-center justify-center transition-all ${addSectionOpenClose ? 'flex' : 'hidden'}`}
       >
         <div className='w-full xl:w-5/12 bg-slate-200  h-screen xl:h-2/3 xl:rounded-2xl overflow-auto overflow-y-scroll no-scrollbar flex flex-col items-center mt-20 xl:mt-0'>
           <button
@@ -224,10 +242,10 @@ const Messages = ({ socket }) => {
             className='text-6xl text-red-500 px-6 self-end hover:scale-95'>
             <IoClose />
           </button>
-          <form name='searchInput' className='w-full items-center flex flex-col' onSubmit={inputForm}>
+          <form name='searchInput' className='w-full items-center flex flex-col'>
             <input
               type="text"
-              // ref={searchRef}
+              ref={searchRef}
               value={search}
               name='searchInput'
               onChange={(e) => setSearch(e.target.value)
