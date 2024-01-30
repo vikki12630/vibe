@@ -89,7 +89,7 @@ const SignUp = () => {
 
 
   return (
-    <div className='flex flex-col xl:flex-row h-screen w-full items-center'>
+    <div className='flex flex-col xl:flex-row h-svh w-full items-center'>
       <img src="/loginpage.svg" className='w-10/12 xl:h-screen' alt="" />
       <div className=' text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 flex flex-col w-full items-center justify-center  gap-2'>
         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
