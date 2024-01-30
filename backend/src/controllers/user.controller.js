@@ -59,7 +59,7 @@ const signUp = asyncHandler(async (req, res) => {
     ),
     httpOnly: true,
     secure: true,
-    // sameSite: "None"
+    sameSite: "None"
   };
 
   return res
@@ -106,7 +106,7 @@ const signIn = asyncHandler(async (req, res) => {
     ),
     httpOnly: true,
     secure: true,
-    // sameSite: "None"
+    sameSite: "None"
   };
 
   return res
@@ -124,6 +124,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     expires: new Date(Date.now()),
     httpOnly: true,
     secure: true,
+    sameSite: "None",
   };
 
   return res
