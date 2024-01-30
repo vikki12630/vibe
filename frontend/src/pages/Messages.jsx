@@ -168,11 +168,11 @@ const Messages = ({ socket }) => {
   }, [arrivalMsg, currentChat])
 
   return (
-    <div className='flex w-full flex-col md:flex-row h-screen'>
+    <div className='flex w-full flex-col md:flex-row h-svh'>
       <LeftNavHome setCurrentChat={setCurrentChat} />
       <div className='w-full xl:w-7/12 flex flex-col justify-center items-center relative'>
         {currentChat ? <>
-          <div className="w-full bg-[url('/chat-page.svg')] h-screen flex flex-col pt-20 xl:pt-0 mx-auto relative items-center ">
+          <div className="w-full bg-[url('/chat-page.svg')] h-svh flex flex-col pt-20 xl:pt-0 mx-auto relative items-center ">
             <p className='absolute bottom-0 left-0 pb-2 text-xs opacity-20'><a href="https://www.freepik.com/free-vector/simple-blue-gradient-background-vector-business_35481295.htm#fromView=search&term=background+svg&track=ais&regularType=vector&page=6&position=3&uuid=77368b92-2c5f-4236-ad74-8325427b1809">Image by rawpixel.com</a> on Freepik</p>
             <div className='flex py-1 xl:py-2 px-5 gap-4 shadow-md w-full items-center border-b-2 border-black'>
               <img
@@ -181,7 +181,7 @@ const Messages = ({ socket }) => {
               />
               <p className='text-3xl font-semibold'>{otherUser?.username}</p>
             </div>
-            <div id='messages' className="w-full  flex flex-col gap-1 h-screen overflow-auto overflow-y-scroll no-scrollbar pb-24 px-4 xl:px-10 ">
+            <div id='messages' className="w-full  flex flex-col gap-1 h-svh overflow-auto overflow-y-scroll no-scrollbar pb-24 px-4 xl:px-10 ">
 
 
               {messages?.map((message) => (
@@ -212,7 +212,7 @@ const Messages = ({ socket }) => {
             </form>
           </div>
         </> :
-          <div className='hidden md:block h-screen'>
+          <div className='hidden md:block h-svh'>
             <img src="/openconversation.svg" className='h-4/6' alt="" />
             <p className='text-center text-4xl '>open a conversation</p>
             <p className='absolute bottom-2 left-0 hover:bg-green-200'>
@@ -235,9 +235,9 @@ const Messages = ({ socket }) => {
 
       </div>
 
-      <section className={`absolute top-0 h-screen bg-transparent w-full text-5xl flex-col items-center justify-center transition-all ${addSectionOpenClose ? 'flex' : 'hidden'}`}
+      <section className={`absolute top-0 h-svh bg-transparent w-full text-5xl flex-col items-center justify-center transition-all ${addSectionOpenClose ? 'flex' : 'hidden'}`}
       >
-        <div className='w-full xl:w-5/12 bg-slate-200  h-screen xl:h-2/3 xl:rounded-2xl overflow-auto overflow-y-scroll no-scrollbar flex flex-col items-center mt-20 xl:mt-0'>
+        <div className='w-full xl:w-5/12 bg-slate-200  h-svh xl:h-2/3 xl:rounded-2xl overflow-auto overflow-y-scroll no-scrollbar flex flex-col items-center mt-20 xl:mt-0'>
           <button
             onClick={closeConversationBtn}
             className='text-6xl text-red-500 px-6 self-end hover:scale-95'>

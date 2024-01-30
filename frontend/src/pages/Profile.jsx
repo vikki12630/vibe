@@ -13,9 +13,9 @@ const Profile = () => {
   const { userPosts } = useSelector((state) => state.posts)
 
   useEffect(() => {
-   setPosts(userPosts)
+    setPosts(userPosts)
   }, [userPosts])
-  
+
 
   useEffect(() => {
     dispatch(getUserPosts())
@@ -26,7 +26,7 @@ const Profile = () => {
   }
 
   return (
-    <div className='pt-16 h-screen overflow-auto h-42 overflow-y-scroll no-scrollbar  bg-slate-100 w-full xl:pt-0 flex flex-col items-center xl:w-7/12 '>
+    <div className='pt-16 h-svh overflow-auto h-42 overflow-y-scroll no-scrollbar  bg-slate-100 w-full xl:pt-0 flex flex-col items-center xl:w-7/12 '>
       <div className='flex justify-center bg-gradient-to-b from-green-100 via-zinc-100 to-blue-100 items-center py-6 w-full gap-4 md:self-center md:gap-10 '>
         <div className='flex flex-col items-center'>
           <img
@@ -41,8 +41,8 @@ const Profile = () => {
             <p>{currentUser?.followers.length} {currentUser?.followers.length <= 1 ? 'follower' : 'followers'}</p>
             <p>{currentUser?.following.length} following</p>
           </div>
-          <button 
-          onClick={settingsBtnClicked}
+          <button
+            onClick={settingsBtnClicked}
             className='px-3 py-1 rounded-lg shadow-md bg-slate-300 w-28 md:w-36 md:h-12 hover:bg-slate-500 hover:text-white'
           >
             settings

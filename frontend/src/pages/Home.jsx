@@ -27,7 +27,7 @@ const Home = () => {
     getCurrentUser()
   }
 
-  return ( userFeed.length ? <div className="h-screen overflow-auto h-42 overflow-y-scroll no-scrollbar w-full min-h-screen pt-20 xl:pt-0 xl:w-7/12 xl:bg-[url('/feedpage.svg')] ">
+  return (userFeed.length ? <div className="h-svh overflow-auto h-42 overflow-y-scroll no-scrollbar w-full min-h-svh pt-20 xl:pt-0 xl:w-7/12 xl:bg-[url('/feedpage.svg')] ">
 
     {userFeed?.map((post) => (
       <FeedPost
@@ -35,8 +35,8 @@ const Home = () => {
         post={post}
       />
     ))}
-  </div> : <div className="h-screen w-full  pt-20 xl:pt-0 xl:w-7/12 flex items-center xl:bg-[url('/feedpage.svg')] relative">
-    <img className='w-4/6 h-screen' src={"/noposts.svg"} alt="" />
+  </div> : <div className="h-svh w-full  pt-20 xl:pt-0 xl:w-7/12 flex items-center xl:bg-[url('/feedpage.svg')] relative">
+    <img className='w-4/6 h-svh' src={"/noposts.svg"} alt="" />
     <div className=' w-full h-96 flex flex-col justify-center text-2xl pr-2 text-slate-400'>
       <h6 className=' underline text-4xl text-red-400 mb-5'>empty feed ?</h6>
       <p> add post or follow someone to see their post !</p>
@@ -45,7 +45,7 @@ const Home = () => {
     </div>
     <a className='absolute bottom-0 text-slate-300' href="https://www.freepik.com/free-vector/empty-concept-illustration_18840616.htm#query=empty&position=42&from_view=search&track=sph&uuid=04c0b977-8a84-433d-996c-e1e6c3f16a95">Image by storyset on Freepik</a>
 
-  </div> )
+  </div>)
 }
 
 export default Home

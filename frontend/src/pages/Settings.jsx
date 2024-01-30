@@ -184,7 +184,7 @@ const Settings = ({ getCurrentUser }) => {
   return (
 
     <>
-      <div className='w-full h-screen transition-all xl:w-7/12'>
+      <div className='w-full h-svh transition-all xl:w-7/12'>
         <div className='mt-20 flex flex-col items-center xl:mt-0 '>
           <div className='flex items-center underline gap-4 text-6xl font-semibold mb-6'>Settings <LiaUserEditSolid />
           </div>
@@ -238,7 +238,7 @@ const Settings = ({ getCurrentUser }) => {
           </div>
         </div>
       </div>
-      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isAvatar ? 'flex' : 'hidden'}`}>
+      <section className={`absolute top-0 h-svh bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isAvatar ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12  mt-28'>
           <button
             onClick={closeChangeAvatar}
@@ -272,7 +272,7 @@ const Settings = ({ getCurrentUser }) => {
 
         </div>
       </section>
-      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isUserName ? 'flex' : 'hidden'}`}>
+      <section className={`absolute top-0 h-svh bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isUserName ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12 h-1/3 mt-28'>
           <button
             onClick={closeChangeUserName}
@@ -295,7 +295,7 @@ const Settings = ({ getCurrentUser }) => {
         </div>
       </section>
 
-      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isName ? 'flex' : 'hidden'}`}>
+      <section className={`absolute top-0 h-svh bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isName ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12 h-1/3 mt-28'>
           <button
             onClick={closeChangeFullName}
@@ -318,7 +318,7 @@ const Settings = ({ getCurrentUser }) => {
         </div>
       </section>
 
-      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isEmail ? 'flex' : 'hidden'}`}>
+      <section className={`absolute top-0 h-svh bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isEmail ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12 h-1/3 mt-28'>
           <button
             onClick={closeChangeEmail}
@@ -341,7 +341,7 @@ const Settings = ({ getCurrentUser }) => {
         </div>
       </section>
 
-      <section className={`absolute top-0 h-screen bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isPassword ? 'flex' : 'hidden'}`}>
+      <section className={`absolute top-0 h-svh bg-slate-200 w-full text-5xl flex-col items-center transition-all  ${isPassword ? 'flex' : 'hidden'}`}>
         <div className=' flex flex-col w-full xl:w-6/12 h-1/3 mt-28'>
           <button
             onClick={closeChangePassword}

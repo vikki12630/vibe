@@ -20,7 +20,7 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isPostMenu, setIsPostMenu] = useState(false);
   const { currentUser } = useSelector((state) => state.auth)
-  
+
   const logoutHandler = async (e) => {
     e.preventDefault();
     try {
@@ -75,7 +75,7 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
 
   return (
     <>
-      <section className='w-full h-20 flex justify-between items-center px-6 text-4xl  md:px-12 border-b-2 border-slate-900 xl:border-b-0 bg-slate-200 transition-all transition-0.5 xl:w-2/12 xl:flex-col xl:min-h-screen xl:justify-center xl:sticky absolute top-0 z-10'>
+      <section className='w-full h-20 flex justify-between items-center px-6 text-4xl  md:px-12 border-b-2 border-slate-900 xl:border-b-0 bg-slate-200 transition-all transition-0.5 xl:w-2/12 xl:flex-col xl:min-h-svh xl:justify-center xl:sticky absolute top-0 z-10'>
         <h1 className='xl:absolute xl:top-0 xl:py-8 font-logofont text-6xl bg-gradient-to-r from-cyan-400 via-violet-600 to-pink-300 bg-clip-text text-transparent'>vibe<span className='ml-1'>✓</span></h1>
         <div className='flex items-center xl:flex-col '>
           <button
@@ -139,7 +139,7 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
 
       <section
         id='mobile-menu'
-        className={isMobileMenu ? 'absolute top-0 min-h-screen bg-slate-300 w-full text-5xl  flex-col items-center text-slate-700 flex z-20' : 'absolute top-0 min-h-screen bg-slate-300 w-full text-5xl  flex-col items-center text-slate-700 hidden z-20'}>
+        className={isMobileMenu ? 'absolute top-0 min-h-svh bg-slate-300 w-full text-5xl  flex-col items-center text-slate-700 flex z-20' : 'absolute top-0 min-h-svh bg-slate-300 w-full text-5xl  flex-col items-center text-slate-700 hidden z-20'}>
         <button onClick={closeMenuHandler} className='text-6xl text-red-500 self-end px-6 py-4 mb-20'>
           <IoClose />
         </button>
@@ -182,8 +182,8 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
         </nav>
       </section>
 
-      <section id='addPostSmMdDevices' className={isPostMenu ? 'absolute top-0 h-screen bg-transparent w-full text-5xl flex-col items-center justify-center transition-all flex' : 'absolute top-0 h-screen  w-full text-5xl flex-col items-center justify-center transition-all hidden'}>
-        <div className='w-full xl:w-6/12 bg-slate-800  text-white h-screen xl:h-5/6 xl:rounded-2xl overflow-auto overflow-y-scroll no-scrollbar flex flex-col items-center mt-20 xl:mt-0 z-20'>
+      <section id='addPostSmMdDevices' className={isPostMenu ? 'absolute top-0 h-svh bg-transparent w-full text-5xl flex-col items-center justify-center transition-all flex' : 'absolute top-0 h-svh  w-full text-5xl flex-col items-center justify-center transition-all hidden'}>
+        <div className='w-full xl:w-6/12 bg-slate-800  text-white h-svh xl:h-5/6 xl:rounded-2xl overflow-auto overflow-y-scroll no-scrollbar flex flex-col items-center mt-20 xl:mt-0 z-20'>
           <button
             onClick={closePostMenuHandler}
             className='text-6xl text-red-500 px-6 xl:py-1 self-end hover:scale-95'>

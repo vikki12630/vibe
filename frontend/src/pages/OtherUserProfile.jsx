@@ -65,7 +65,7 @@ const OtherUserProfile = () => {
   }
 
   return (
-    <div className='mt-20 xl:h-screen overflow-auto h-42 overflow-y-scroll no-scrollbar bg-slate-100 w-full xl:mt-0 flex flex-col items-center xl:w-7/12'>
+    <div className='mt-20 xl:h-svh overflow-auto h-42 overflow-y-scroll no-scrollbar bg-slate-100 w-full xl:mt-0 flex flex-col items-center xl:w-7/12'>
       {loading ? <p>loading...</p> : <div className='flex self-center justify-center w-full  items-center  gap-4 md:self-center md:gap-10 py-6 bg-gradient-to-b from-green-100 via-zinc-100 to-blue-100'>
         <div className='flex flex-col  items-center'>
           <img
@@ -92,7 +92,7 @@ const OtherUserProfile = () => {
       </div>
       {/* ++++++++++++++++++++++++++++++++++ */}
 
-      <div className='w-full min-h-screen bg-gradient-to-b from-green-100 via-zinc-100 to-blue-100 p-2 flex flex-wrap'>
+      <div className='w-full min-h-svh bg-gradient-to-b from-green-100 via-zinc-100 to-blue-100 p-2 flex flex-wrap'>
         {posts.length === 0 ?
           <p className=' mt-32 mx-auto text-3xl  sm:text-6xl flex gap-2  py-6'>
             <PiSmileySadDuotone />no posts available...!</p> : posts?.map((post) =>
