@@ -20,6 +20,7 @@ const LeftNavHome = ({ setCurrentChat, setNewUserFeed }) => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isPostMenu, setIsPostMenu] = useState(false);
   const { currentUser } = useSelector((state) => state.auth)
+  
   const logoutHandler = async (e) => {
     e.preventDefault();
     try {
