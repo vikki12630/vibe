@@ -10,6 +10,7 @@ const Message = ({ message, currentUser, scrollRef, otherUser }) => {
           <div className=' flex gap-2 self-end'>
             <p className=' border-2 rounded-lg px-2 py-1 my-auto bg-slate-100 shadow shadow-black break-all text-xl'>{message?.text}</p>
             <img
+              loading='lazy'
               src={currentUser.avatar || "/user_keov54.png"}
               alt=""
               className='rounded-full h-10 md:h-12 self-center'
@@ -21,6 +22,7 @@ const Message = ({ message, currentUser, scrollRef, otherUser }) => {
         <div ref={scrollRef} className=' self-start flex flex-col w-3/4 mt-2'>
           <div className='flex gap-2 w-fit h-fit'>
             <img
+              loading='lazy'
               src={otherUser?.avatar || "/user_keov54.png"}
               alt=""
               className='rounded-full h-10 md:h-12 self-center'

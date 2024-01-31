@@ -26,6 +26,7 @@ const ConversationSearchedUser = ({ user, setCurrentChat, currentUser, setAddSec
         className='flex items-center  gap-4  cursor-pointer w-full'
       >
         <img
+        loading='lazy'
           src={user?.avatar || "/user_keov54.png"}
           alt="userimg"
           className='h-16 rounded-full ml-5'

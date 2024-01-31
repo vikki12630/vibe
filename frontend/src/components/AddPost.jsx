@@ -81,7 +81,7 @@ const AddPost = ({ setIsPostMenu, setNewUserFeed }) => {
 
   return (
     <div className='w-full flex mt-20 items-center flex-col xl:flex-row gap-2 xl:justify-center xl:gap-4 xl:px-2 xl:mt-20'>
-      <img id="preview" src="/gallery.svg" alt='img' className='w-60 md:w-80 xl:h-80 my-2 xl:my-0' />
+      <img loading='lazy' id="preview" src="/gallery.svg" alt='img' className='w-60 md:w-80 xl:h-80 my-2 xl:my-0' />
       <div className='flex flex-col items-center w-5/6 '>
         <div className=' flex flex-col items-center gap-3 ' >
 

@@ -27,9 +27,9 @@ const FeedPost = ({ post }) => {
     e.preventDefault()
     try {
       const config = {
-        withCredentials:true
+        withCredentials: true
       }
-      const response = await axios.get(`${conf.backendUrl}/api/v1/posts/like/${post?._id}`,config)
+      const response = await axios.get(`${conf.backendUrl}/api/v1/posts/like/${post?._id}`, config)
       setLiked(!liked)
       setLikeLenght(liked ? likeLenght.filter(user => user !== currentUserId) : (prev) => [...prev, currentUserId])
     } catch (error) {
@@ -72,6 +72,7 @@ const FeedPost = ({ post }) => {
             className='flex items-center gap-2 cursor-pointer'>
             {/* user_keov54.png */}
             <img
+              loading='lazy'
               src={post?.postedBy?.avatar || 'user_keov54.png'}
               alt="profile img"
               className='h-16 rounded-full sm:h-20 border-2 border-slate-800'

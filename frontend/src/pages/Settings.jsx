@@ -191,6 +191,7 @@ const Settings = ({ getCurrentUser }) => {
           <div className='w-3/4 mx-auto gap-2 flex flex-col'>
             <div onClick={changeAvatarHandler} className='self-center flex flex-col text-3xl cursor-pointer'>
               <img
+                loading='lazy'
                 src={currentUser?.avatar || "/user_keov54.png"}
                 alt="profile img"
                 className='h-40 rounded-full'

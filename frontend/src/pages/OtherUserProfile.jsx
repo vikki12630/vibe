@@ -69,6 +69,7 @@ const OtherUserProfile = () => {
       {loading ? <p>loading...</p> : <div className='flex self-center justify-center w-full  items-center  gap-4 md:self-center md:gap-10 py-6 bg-gradient-to-b from-green-100 via-zinc-100 to-blue-100'>
         <div className='flex flex-col  items-center'>
           <img
+          loading='lazy'
             src={user?.avatar || "/user_keov54.png"}
             alt="profile pic"
             className='h-24 md:h-36 rounded-full border-2 border-slate-800'

@@ -30,6 +30,7 @@ const Profile = () => {
       <div className='flex justify-center bg-gradient-to-b from-green-100 via-zinc-100 to-blue-100 items-center py-6 w-full gap-4 md:self-center md:gap-10 '>
         <div className='flex flex-col items-center'>
           <img
+            loading='lazy'
             src={currentUser?.avatar || "/user_keov54.png"}
             alt="profile pic"
             className='h-24 md:h-36 rounded-full border-2 border-slate-800'

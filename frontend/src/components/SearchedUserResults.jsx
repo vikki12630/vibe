@@ -23,6 +23,7 @@ const SearchedUserResults = ({ user }) => {
         onClick={navigateToProfile}
       >
         <img
+        loading='lazy'
           src={user?.avatar || "/user_keov54.png"}
           alt="userimg"
           className='h-14 rounded-full m-1'

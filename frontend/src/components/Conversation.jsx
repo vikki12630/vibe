@@ -25,7 +25,7 @@ const Conversation = ({ conversation, currentUser }) => {
   return (
     <div className='my-1 w-full xl:px-4 flex justify-center cursor-pointer hover:scale-105 transition-all'>
       <div className='flex gap-2 items-center border-2 border-slate-400 rounded-full p-1 w-10/12 md:mx-1 xl:mx-0 '>
-        <img src={otherUser?.avatar || "/user_keov54.png"} className='rounded-full h-16' alt="" />
+        <img loading='lazy' src={otherUser?.avatar || "/user_keov54.png"} className='rounded-full h-16' alt="" />
         <div className='mr-auto'>
           <p className='text-xl font-semibold'>{otherUser?.username}</p>
           {lastMessage?.sender === currentUser._id ? <p className='text-md'><span className='font-semibold'>you:</span>  {lastMessage?.text.slice(0, 15)}...</p> : <p className='text-md'>{lastMessage?.text.slice(0, 20)}...</p>}

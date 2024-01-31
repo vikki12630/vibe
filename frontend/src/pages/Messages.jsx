@@ -176,6 +176,7 @@ const Messages = ({ socket }) => {
             <p className='absolute bottom-0 left-0 pb-2 text-xs opacity-20'><a href="https://www.freepik.com/free-vector/simple-blue-gradient-background-vector-business_35481295.htm#fromView=search&term=background+svg&track=ais&regularType=vector&page=6&position=3&uuid=77368b92-2c5f-4236-ad74-8325427b1809">Image by rawpixel.com</a> on Freepik</p>
             <div className='flex py-1 xl:py-2 px-5 gap-4 shadow-md w-full items-center border-b-2 border-black'>
               <img
+              loading='lazy'
                 src={otherUser?.avatar || "/user_keov54.png"}
                 className='rounded-full h-16'
               />
@@ -213,7 +214,7 @@ const Messages = ({ socket }) => {
           </div>
         </> :
           <div className='hidden md:block h-svh'>
-            <img src="/openconversation.svg" className='h-4/6' alt="" />
+            <img loading='lazy' src="/openconversation.svg" className='h-4/6' alt="" />
             <p className='text-center text-4xl '>open a conversation</p>
             <p className='absolute bottom-2 left-0 hover:bg-green-200'>
               <a href="https://www.freepik.com/free-vector/happy-man-online-dating-via-laptop_9649925.htm#query=chat%20svg&position=11&from_view=keyword&track=ais&uuid=6ecd0f69-6103-4adb-9e84-376626ce7a24">Image by pch.vector on Freepik</a>

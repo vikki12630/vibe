@@ -5,6 +5,7 @@ const ProfilePagePostComponent = ({ post }) => {
   return (
     <>
       <img
+        loading='lazy'
         src={post?.postImage}
         alt="postImage"
         className='w-1/3 h-fit p-0.5'

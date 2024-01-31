@@ -27,7 +27,8 @@ const Home = () => {
     getCurrentUser()
   }
 
-  return (userFeed.length ? <div className="h-svh overflow-auto h-42 overflow-y-scroll no-scrollbar w-full min-h-svh pt-20 xl:pt-0 xl:w-7/12 xl:bg-[url('/feedpage.svg')] ">
+  return (
+    userFeed.length ? <div className="h-svh overflow-auto h-42 overflow-y-scroll no-scrollbar w-full min-h-svh pt-20 xl:pt-0 xl:w-7/12 xl:bg-[url('/feedpage.svg')] ">
 
     {userFeed?.map((post) => (
       <FeedPost
@@ -45,7 +46,8 @@ const Home = () => {
     </div>
     <a className='absolute bottom-0 text-slate-300' href="https://www.freepik.com/free-vector/empty-concept-illustration_18840616.htm#query=empty&position=42&from_view=search&track=sph&uuid=04c0b977-8a84-433d-996c-e1e6c3f16a95">Image by storyset on Freepik</a>
 
-  </div>)
+  </div>
+  )
 }
 
 export default Home
